@@ -4,7 +4,7 @@ const argsParser = require('yargs-parser');
 const updater = require('update-notifier');
 const path = require('path');
 const fs = require('fs-extra');
-const opn = require('opn');
+const open = require('open');
 const pkg = require('../package.json');
 const startServer = require('../lib/server');
 const writeStatic = require('../lib/static');
@@ -20,7 +20,7 @@ const alias = {
 
 const argv = argsParser(process.argv.slice(2), { alias });
 
-const { version, static: isStatic, featuredSlide, print, disableAutoOpen } = argv;
+const { version, static: isStatic, featuredSlide, print, printSize, disableAutoOpen } = argv;
 
 const [isStartServer] = argv._;
 
@@ -37,10 +37,10 @@ updater({ pkg }).notify();
         await writeStatic();
         server.close();
       } else if (print) {
-        await exportPDF(initialUrl, print);
+        await exportPDF(initialUrl, print, printSize);
         server.close();
       } else if (!disableAutoOpen) {
-        opn(initialUrl);
+        open(initialUrl);
       }
     } catch (err) {
       console.error(err);
