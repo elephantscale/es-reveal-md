@@ -140,11 +140,21 @@
   <div id="hidden" style="display:none;">
     <div id="header">
       <div id="header-left"></div>
-      <div id="footer-left">Copyright © 2017 Elephant Scale. All rights reserved.</div>
+      <div id="bottom-left"></div>
+      <div id="bottom-right"></div>
+      <div id="bottom-center"></div>
     </div>
   </div>
 
   <script type="text/javascript">
+   var copyright = {{{copyright}}};
+   copyright.text = copyright.text.replace('CURRENT_YEAR',new Date().getFullYear())
+
+   if(copyright.visible){
+         console.log('#'+copyright.position)
+         $('#'+copyright.position).text(copyright.text);
+      }
+
     var header = $('#header').html();
     if (window.location.search.match(/print-pdf/gi)) {
       Reveal.addEventListener('ready', function (event) {
@@ -153,8 +163,6 @@
     } else {
       $('div.reveal').append(header);
     }
-
-
 
     Reveal.addEventListener('ready', function (event) {
       $('h1').first().addClass('cover-page');
@@ -192,6 +200,7 @@
         $("div.slide-number").show();
     });
   </script>
+
 </body>
 
 </html>
