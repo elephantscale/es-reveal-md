@@ -160,6 +160,14 @@
     if (window.location.search.match(/print-pdf/gi)) {
       Reveal.addEventListener('ready', function (event) {
         $('.slide-background').append(header);
+
+        //alternative image source for .gif files with custom attribute "pdf-src"
+        $('img[pdf-src]').each(function(){
+          console.log($(this));
+          $(this).attr('src', $(this).attr('pdf-src'));
+          $(this).removeAttr('pdf-src');
+        });
+
       });
     } else {
       $('div.reveal').append(header);
