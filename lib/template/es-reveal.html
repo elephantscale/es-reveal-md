@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel='shortcut icon' type='image/x-icon' href='./template/images/favicon.ico' />
+  <link rel='shortcut icon' type='image/x-icon' href='{{{base}}}/template/images/favicon.ico' />
 
   <title>{{{title}}}</title>
   {{#absoluteUrl}}
@@ -13,7 +13,7 @@
   <meta property="og:url" content="{{{absoluteUrl}}}">
   {{/absoluteUrl}}
   <link rel="stylesheet" href="{{{base}}}/css/reveal.css">
-  <link rel="stylesheet" href="./template/css/es.css" id="theme">
+  <link rel="stylesheet" href="{{{base}}}/template/css/es.css" id="theme">
   <link rel="stylesheet" href="{{{base}}}{{{highlightThemeUrl}}}">
   <link rel="stylesheet" href="{{{base}}}/css/print/{{#print}}pdf{{/print}}{{^print}}paper{{/print}}.css"
     type="text/css" media="print">
@@ -37,7 +37,7 @@
     <div class="slides">{{{slides}}}</div>
   </div>
 
-  <script src="./template/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="{{{base}}}/template/js/jquery-3.3.1.slim.min.js"></script>
   <script src="{{{base}}}/js/reveal.js"></script>
 
   <script>
@@ -93,16 +93,16 @@
         async: true
       },
       {
-        src: './template/plugin/menu/menu.js'
+        src: '{{{base}}}/template/plugin/menu/menu.js'
       },
       {
-        src: './template/plugin/chalkboard/chalkboard.js'
+        src: '{{{base}}}/template/plugin/chalkboard/chalkboard.js'
       },
       {
-        src: './template/plugin/search/search.js' 
+        src: '{{{base}}}/template/plugin/search/search.js' 
       },
       {
-        src: './template/plugin/speaker-note/speaker-note.js' 
+        src: '{{{base}}}/template/plugin/speaker-note/speaker-note.js' 
       }
     ];
 
