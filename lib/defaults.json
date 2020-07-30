@@ -13,5 +13,6 @@
   "template": "template/es-reveal.html",
   "theme": "black",
   "title": "Elephant Scale",
-  "verticalSeparator": "\r?\n----\r?\n"
+  "verticalSeparator": "\r?\n----\r?\n",
+  "glob": "**/*.md"
 }
