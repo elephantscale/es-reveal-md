@@ -156,6 +156,16 @@ body.print-pdf .btn-tools {
 	display: none;
 }
 
+/*
+ * Hide menu for pdf printing
+ */
+ html.print-pdf .slide-menu-wrapper .slide-menu,
+ html.print-pdf .reveal .slide-menu-button,
+ html.print-pdf .slide-menu-wrapper .slide-menu-overlay,
+ html.print-pdf .btn-tools {
+	 display: none;
+ }
+
 .reveal .overlay.overlay-help .viewport .viewport-inner .title{
 	color:white;
 	margin: 0 !important;
