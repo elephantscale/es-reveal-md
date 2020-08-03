@@ -29,6 +29,29 @@
       ':35729/livereload.js?snipver=1"></' + 'script>');
   </script>
   {{/watch}}
+
+  <script src="{{{base}}}/template/js/jquery-3.3.1.slim.min.js"></script>
+  <script src="{{{base}}}/dist/reveal.js"></script>
+
+  <script>
+    var revealopt = {{{revealOptionsStr}}};
+    
+    if(window.location.search.match(/print-pdf/gi) && revealopt.print2page){
+      var style = document.createElement('style');
+      style.type = 'text/css';      
+      style.innerHTML = '.reveal .slides .pdf-page{'+
+                        '   page-break-after:avoid !important;'+
+                        '   height: '+ (revealopt.height / 2) +'px !important;}'+
+                        '.speaker-notes-pdf[data-layout="separate-page"]{'+
+                        '   page-break-after:always !important;'+
+                        '   page-break-before:avoid !important;'+
+                        '   height: '+ (revealopt.height / 2 - 10) +'px !important;'+
+                        '   margin-top: 9px !important;'+
+                        '   border-top: 1px black dashed !important;}';
+
+      document.getElementsByTagName('head')[0].appendChild(style);
+    }
+  </script>
 </head>
 
 <body>
@@ -37,14 +60,11 @@
     <div class="slides">{{{slides}}}</div>
   </div>
 
-  <script src="{{{base}}}/template/js/jquery-3.3.1.slim.min.js"></script>
-  <script src="{{{base}}}/dist/reveal.js"></script>
-
-    <script src="{{{base}}}/plugin/markdown/markdown.js"></script>
-    <script src="{{{base}}}/plugin/highlight/highlight.js"></script>
-    <script src="{{{base}}}/plugin/zoom/zoom.js"></script>
-    <script src="{{{base}}}/plugin/notes/notes.js"></script>
-    <script src="{{{base}}}/plugin/math/math.js"></script>
+  <script src="{{{base}}}/plugin/markdown/markdown.js"></script>
+  <script src="{{{base}}}/plugin/highlight/highlight.js"></script>
+  <script src="{{{base}}}/plugin/zoom/zoom.js"></script>
+  <script src="{{{base}}}/plugin/notes/notes.js"></script>
+  <script src="{{{base}}}/plugin/math/math.js"></script>
 
   <script>
     function extend() {
@@ -95,11 +115,11 @@
 		  theme: "whiteboard",
 	  },
       keyboard: {
-				    67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle chalkboard when 'c' is pressed
-				    66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
-				    46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
-				     8: function() { RevealChalkboard.reset() },	// reset all chalkboard data when 'BACKSPACE' is pressed
-				    68: function() { RevealChalkboard.download() },	// downlad chalkboard drawing when 'd' is pressed
+				  67: function() { RevealChalkboard.toggleNotesCanvas() },	// toggle chalkboard when 'c' is pressed
+				  66: function() { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+				  46: function() { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+				  8: function() { RevealChalkboard.reset() },	// reset all chalkboard data when 'BACKSPACE' is pressed
+				  68: function() { RevealChalkboard.download() },	// downlad chalkboard drawing when 'd' is pressed
 					88: function() { RevealChalkboard.colorNext() },	// cycle colors forward when 'x' is pressed
 					89: function() { RevealChalkboard.colorPrev() },	// cycle colors backward when 'y' is pressed
 				}
@@ -166,6 +186,16 @@
         if ($(this).find("h1").not('.cover-page').length == 1)
           slides.push(i);
         i++
+
+        //========PRINT 2 PAGE PER SHEET ===========================
+        if (window.location.search.match(/print-pdf/gi) && revealopt.print2page) {
+          if($(this).find("aside").length == 0){
+            $(this).append('<aside class="notes"><p></p></aside>')
+          } else if($(this).find("aside p").length == 0){
+           $(this).find("aside").append('<p></p>')
+          }
+        }
+
       });
 
       for (var i = 0; i < slides.length; i++) {
