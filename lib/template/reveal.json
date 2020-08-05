@@ -13,7 +13,7 @@
     "center": false,
     "controls": true,
     "progress": true,
-    "showNotes": false,
+    "showNotes": true,
     "slideNumber": true,
 
     "data-separator": "^\n---\n$",

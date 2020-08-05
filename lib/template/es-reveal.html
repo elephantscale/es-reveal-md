@@ -36,21 +36,26 @@
   <script>
     var revealopt = {{{revealOptionsStr}}};
     
-    if(window.location.search.match(/print-pdf/gi) && revealopt.print2page){
-      var style = document.createElement('style');
-      style.type = 'text/css';      
-      style.innerHTML = '.reveal .slides .pdf-page{'+
-                        '   page-break-after:avoid !important;'+
-                        '   height: '+ (revealopt.height / 2) +'px !important;}'+
-                        '.speaker-notes-pdf[data-layout="separate-page"]{'+
-                        '   page-break-after:always !important;'+
-                        '   page-break-before:avoid !important;'+
-                        '   height: '+ (revealopt.height / 2 - 10) +'px !important;'+
-                        '   font-size: inherit !important;'+
-                        '   margin-top: 9px !important;'+
-                        '   border-top: 1px black dashed !important;}';
+    if(window.location.search.match(/print-pdf/gi)){  
+      var pdf_style = document.createElement('style');
+      pdf_style.type = 'text/css'; 
 
-      document.getElementsByTagName('head')[0].appendChild(style);
+      if(revealopt.print2page){
+        pdf_style.innerHTML = '.reveal .slides .pdf-page{'+
+                              '   page-break-after:avoid !important;'+
+                              '   height: '+ (revealopt.height / 2) +'px !important;}'+
+                              '.speaker-notes-pdf[data-layout="separate-page"]{'+
+                              '   page-break-after:always !important;'+
+                              '   page-break-before:avoid !important;'+
+                              '   height: '+ (revealopt.height / 2 - 10) +'px !important;'+
+                              '   font-size: inherit !important;'+
+                              '   margin-top: 9px !important;'+
+                              '   border-top: 1px black dashed !important;}';
+      } else {
+        pdf_style.innerHTML = '.speaker-notes-pdf[data-layout="inline"]{display:none !important;}';
+      }
+
+      document.getElementsByTagName('head')[0].appendChild(pdf_style);
     }
   </script>
 </head>
