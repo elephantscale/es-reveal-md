@@ -43,14 +43,16 @@
       if(revealopt.print2page){
         pdf_style.innerHTML = '.reveal .slides .pdf-page{'+
                               '   page-break-after:avoid !important;'+
-                              '   height: '+ (revealopt.height / 2) +'px !important;}'+
+                              '   height: '+ (revealopt.height / 2) +'px !important; }\n'+
                               '.speaker-notes-pdf[data-layout="separate-page"]{'+
                               '   page-break-after:always !important;'+
                               '   page-break-before:avoid !important;'+
-                              '   height: '+ (revealopt.height / 2 - 10) +'px !important;'+
+                              '   page-break-inside:always !important;'+
+                              '   height: 100% !important;'+
                               '   font-size: inherit !important;'+
-                              '   margin-top: 9px !important;'+
-                              '   border-top: 1px black dashed !important;}';
+                              '   border-top: 1px black dashed !important;'+
+                              '   overflow: visible !important; }';
+                             
       } else {
         pdf_style.innerHTML = '.speaker-notes-pdf[data-layout="inline"]{display:none !important;}';
       }
@@ -99,6 +101,9 @@
       },
       {
         src: '{{{base}}}/template/plugin/speaker-note/speaker-note.js' 
+      },
+      {
+        src: '{{{base}}}/template/plugin/print/print-mode.js' 
       }
     ];
 
